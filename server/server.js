@@ -3,6 +3,9 @@ dotenv.config({ path: "server/.env" });
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import passport from "passport";
+
+import { users } from "./routes/api/users.js";
 
 const app = express();
 
@@ -25,6 +28,14 @@ mongoose
     Error: ${err}
   `)
   );
+
+app.use(passport.initialize());
+
+import { passportConfig } from "./config/passport.js";
+
+passportConfig(passport);
+
+app.use("/api/users", users);
 
 const port = process.env.PORT || 3000;
 
