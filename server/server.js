@@ -4,12 +4,18 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import passport from "passport";
+import cors from "cors";
 
 import { users } from "./routes/api/users.js";
 
 const app = express();
 
 app
+  .use(
+    cors({
+      origin: "*",
+    })
+  )
   .use(
     bodyParser.urlencoded({
       extended: false,
